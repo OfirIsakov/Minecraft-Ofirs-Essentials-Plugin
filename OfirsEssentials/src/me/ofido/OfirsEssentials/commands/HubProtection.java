@@ -44,13 +44,16 @@ public class HubProtection implements CommandExecutor{
 
 					String regionName = args[1];
 					ArrayList<Integer> cords = new ArrayList<Integer>();
-					try { // adding the cords to an array
-						cords.add(Integer.parseInt(args[2])); 
-						cords.add(Integer.parseInt(args[3])); 
-						cords.add(Integer.parseInt(args[4])); 
-						cords.add(Integer.parseInt(args[5])); 
-						cords.add(Integer.parseInt(args[6])); 
-						cords.add(Integer.parseInt(args[7])); 
+					try { // inserting the cords to an arrayList
+
+						cords.add(Integer.max(Integer.parseInt(args[2]), Integer.parseInt(args[5]))); // point 1 (bigger point)
+						cords.add(Integer.max(Integer.parseInt(args[3]), Integer.parseInt(args[6])));
+						cords.add(Integer.max(Integer.parseInt(args[4]), Integer.parseInt(args[7])));
+
+						cords.add(Integer.min(Integer.parseInt(args[2]), Integer.parseInt(args[5]))); // point 2 (smaller point)
+						cords.add(Integer.min(Integer.parseInt(args[3]), Integer.parseInt(args[6])));
+						cords.add(Integer.min(Integer.parseInt(args[4]), Integer.parseInt(args[7])));
+						
 					} catch (Exception e) { // if error it means that it cannot parse so its not integer
 	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "ERROR: Please enter the cordinatade as integers.");
 						return false;
@@ -99,14 +102,7 @@ public class HubProtection implements CommandExecutor{
         	if (!regionsYML.isConfigurationSection(world_name)) { // if the world wasn't created yet
         		regionsYML.createSection(world_name);
 			}
-        	
-        	regionsYML.set(start + ".point1.X", Integer.max(cords.get(0), cords.get(3))); // setting point 1
-        	regionsYML.set(start + ".point1.Y", Integer.max(cords.get(1), cords.get(4)));
-        	regionsYML.set(start + ".point1.Z", Integer.max(cords.get(2), cords.get(5)));
-        	
-        	regionsYML.set(start + ".point2.X", Integer.min(cords.get(0), cords.get(3))); // setting point 2
-        	regionsYML.set(start + ".point2.Y", Integer.min(cords.get(1), cords.get(4)));
-        	regionsYML.set(start + ".point2.Z", Integer.min(cords.get(2), cords.get(5)));
+        	regionsYML.set(start, cords);
            
         	regionsYML.save(regionsFile);
         } catch (Exception exception) {

@@ -131,14 +131,12 @@ public class Events implements Listener{
 		if (regionsYml.getKeys(false).size() != 0) {
 			try {
 				for (String name: regionsYml.getConfigurationSection(world.getName()).getKeys(false)) {
-					ArrayList<Integer> point;
-					String path = world.getName() + "." + name + ".point";
+					ArrayList<Integer> cords;
+					String path = world.getName() + "." + name;
 					
-					point = getPoint(regionsYml, path + "1");
-					Location point1 = new Location(world, point.get(0), point.get(1), point.get(2));
-					
-					point = getPoint(regionsYml, path + "2");
-					Location point2 = new Location(world, point.get(0), point.get(1), point.get(2));
+					cords = getCords(regionsYml, path);
+					Location point1 = new Location(world, cords.get(0), cords.get(1), cords.get(2)); // point 1
+					Location point2 = new Location(world, cords.get(3), cords.get(4), cords.get(5)); // point 2
 	
 					if (locationInRegion.getX() <= point1.getX()
 					        && locationInRegion.getX() >= point2.getX()
@@ -157,11 +155,7 @@ public class Events implements Listener{
 		return (inRegion);
 	}
 	
-	private ArrayList<Integer> getPoint(FileConfiguration regionsData, String path) {
-		ArrayList<Integer> point = new ArrayList<Integer>();
-		for (String key: regionsData.getConfigurationSection(path).getKeys(false)) {
-			point.add(regionsData.getConfigurationSection(path).getInt(key));
-		}
-		return point;
+	private ArrayList<Integer> getCords(FileConfiguration regionsData, String path) {
+		return (ArrayList<Integer>) regionsData.getIntegerList(path);
 	}
 }
