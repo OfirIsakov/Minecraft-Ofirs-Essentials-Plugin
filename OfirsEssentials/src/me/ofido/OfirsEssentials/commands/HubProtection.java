@@ -64,30 +64,20 @@ public class HubProtection implements CommandExecutor{
 	    	        	return false;
 					}
 					
-					String name = args[1];
-					File regions = new File(Bukkit.getServer().getPluginManager().getPlugin(Main.folderName()).getDataFolder(), "regions.yml");
-					FileConfiguration regionsData = YamlConfiguration.loadConfiguration(regions);
-					try {
-						regionsData.set(start, null); 
-						if (regionsData.getConfigurationSection(start) == null) {
-		    	        	Main.sendMessage(player, ChatColor.DARK_RED + "Region does not exist!");
-							return true;
-						}
-			        	regionsData.getConfigurationSection(start).set(start, null);;
-			        	regionsData.save(regions);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-		        	Main.sendMessage(player, ChatColor.DARK_GREEN + "Deleted region " + name + " successfully!");
+					String regionName = args[1];
+					deleteRegion(player, regionName);
 					return true;
+					
 				}
 			} 
         	Main.sendMessage(player, "Subcommands: addArea, deleteArea");
     		return false;
+    		
 		}
 		
     	Main.tellNoPermissionsCommand(player);
 		return false;
+		
 	}
 	
 	public void createRegion(Player player, String regionName, ArrayList<Integer> cords) {
@@ -128,5 +118,33 @@ public class HubProtection implements CommandExecutor{
     	Main.sendMessage(player, ChatColor.DARK_GREEN + "Region created");
 	}
 	
-	
+	public void deleteRegion(Player player, String regionName) {
+		try {
+			String world_name = player.getWorld().getName();
+			String start = world_name + "." + regionName;
+			File regionsFile = new File(Bukkit.getServer().getPluginManager().getPlugin(Main.folderName()).getDataFolder(), "regions.yml");
+			FileConfiguration regionsYML = YamlConfiguration.loadConfiguration(regionsFile);
+			if (!regionsFile.exists()) { // if no file, try again
+				try {
+					regionsYML.save(regionsFile);
+	            } catch (IOException e) { // didnt work? tell the user
+					player.sendMessage(ChatColor.DARK_RED + String.format("Something went wrong while creating the regions file!"));
+	                e.printStackTrace();
+		        	return;
+	            }
+			}
+			
+			regionsYML.set(start, null); 
+			if (regionsYML.getConfigurationSection(start) == null) {
+	        	Main.sendMessage(player, ChatColor.DARK_RED + "Region does not exist!");
+				return;
+			}
+			regionsYML.getConfigurationSection(start).set(start, null);;
+			regionsYML.save(regionsFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		Main.sendMessage(player, ChatColor.DARK_GREEN + "Deleted region " + regionName + " successfully!");
+	}
 }
