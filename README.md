@@ -1,5 +1,5 @@
-# Minecraft-Ofirs-Essentials-Plugin
 # THIS IS STILL IN BETA! ITS FULL OF BUGS!
+# Minecraft-Ofirs-Essentials-Plugin
 Essentials minecraft plugin.
 
 ### Commands:
