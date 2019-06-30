@@ -1,0 +1,16 @@
+name: OfirsEssentials
+version: 1.0
+author: ofido
+main: me.ofido.OfirsEssentials.Main
+description: Nice Essentials Plugin.
+
+commands:
+  hub:
+   aliases: [spawn]
+   description: Teleport to the hub, can teleport player. No Permissions
+  hubprotection:
+   aliases: [spawnprotection]
+   description: Makes a region that is protected from building, damage and mob spawning. The permission are hubProtection.editRegions, hub.protected.build,
+  sethub:
+   aliases: [setspawn]
+   description: Set the point of the hub. The permission are hub.set,
