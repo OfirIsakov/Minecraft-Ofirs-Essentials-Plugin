@@ -2,6 +2,8 @@
 # Minecraft-Ofirs-Essentials-Plugin
 Essentials minecraft plugin.
 
+# Status: Not working good.
+
 ### Commands:
 ```
 hub:
