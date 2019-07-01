@@ -21,7 +21,7 @@ public class Main extends JavaPlugin{
 	
 	public static void sendMessage(Player player, String msg)
     {
-        String prefix = ChatColor.translateAlternateColorCodes('&', "&6&O[HUB]&r&7 ");
+        String prefix = "" + ChatColor.GOLD + ChatColor.BOLD + "[OfirsEssentials]" + ChatColor.RESET + ChatColor.GRAY;
         player.sendMessage(prefix + msg);
     }
 	

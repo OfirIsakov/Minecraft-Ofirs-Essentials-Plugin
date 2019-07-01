@@ -36,9 +36,9 @@ public class HubProtection implements CommandExecutor{
 		if(player.hasPermission("hub.editRegions")) {
 			if(args.length >= 1) {
 
-				if (args[0].toLowerCase().equals("addRegion".toLowerCase())) { // the addRegion sub command
+				if (args[0].toLowerCase().equals("add".toLowerCase())) { // the add sub command
 					if (args.length < 8) { // if not enough args given tell user
-	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "Usage: hubprotection addRegion <regionName> <x1> <y1> <z1> <x2> <y2> <z2>");
+	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "Usage: hubprotection add <regionName> <x1> <y1> <z1> <x2> <y2> <z2>");
 	    	        	return false;
 					}
 
@@ -61,9 +61,9 @@ public class HubProtection implements CommandExecutor{
 	
 					createRegion(player, regionName,  cords); 
 					return true;
-				} else if (args[0].toLowerCase().equals("deleteRegion".toLowerCase())) { // the deleteRegion sub command
+				} else if (args[0].toLowerCase().equals("delete".toLowerCase())) { // the delete sub command
 					if (args.length < 2) {
-	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "Usage: /hubprotection deleteRegion <regionName>");
+	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "Usage: /hubprotection delete <regionName>");
 	    	        	return false;
 					}
 					
@@ -71,9 +71,12 @@ public class HubProtection implements CommandExecutor{
 					deleteRegion(player, regionName);
 					return true;
 					
+				} else if (args[0].toLowerCase().equals("regions".toLowerCase())) { // the regions sub command
+					printRegions(player);
+					return true;
 				}
 			} 
-        	Main.sendMessage(player, "Subcommands: addRegion, deleteRegion");
+        	Main.sendMessage(player, "Subcommands: add, delete, regions");
     		return false;
     		
 		}
@@ -130,17 +133,44 @@ public class HubProtection implements CommandExecutor{
 	            }
 			}
 			
-			regionsYML.set(start, null); 
-			if (regionsYML.getConfigurationSection(start) == null) {
+			if (regionsYML.contains(start)) {
+				regionsYML.set(start, null); 
+				regionsYML.save(regionsFile);
+			} else {
 	        	Main.sendMessage(player, ChatColor.DARK_RED + "Region does not exist!");
 				return;
 			}
-			regionsYML.getConfigurationSection(start).set(start, null);;
-			regionsYML.save(regionsFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return;
 		}
 		Main.sendMessage(player, ChatColor.DARK_GREEN + "Deleted region " + regionName + " successfully!");
+	}
+	
+	public void printRegions(Player player) {
+		try {
+			String currentWorld = "";
+			File regionsFile = new File(Bukkit.getServer().getPluginManager().getPlugin(Main.folderName()).getDataFolder(), "regions.yml");
+			FileConfiguration regionsYML = YamlConfiguration.loadConfiguration(regionsFile);
+			if (!regionsFile.exists()) { // if no file, try again
+				try {
+					regionsYML.save(regionsFile);
+	            } catch (IOException e) { // didnt work? tell the user
+					player.sendMessage(ChatColor.DARK_RED + String.format("Something went wrong while creating the regions file!"));
+	                e.printStackTrace();
+		        	return;
+	            }
+			}
+			for (String world: regionsYML.getKeys(false)) {
+				currentWorld = ChatColor.DARK_AQUA + world + ": " + ChatColor.AQUA;
+				for (String name: regionsYML.getConfigurationSection(world).getKeys(false)) {
+					currentWorld += name + ", ";
+				}
+	        	Main.sendMessage(player, currentWorld);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
