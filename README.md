@@ -1,10 +1,10 @@
-# THIS IS STILL IN BETA! ITS FULL OF BUGS!
 # Minecraft-Ofirs-Essentials-Plugin
 Essentials minecraft plugin.
 
-# Status: Not working good.
+# THIS IS STILL IN BETA! ITS FULL OF BUGS!
+# Status: Not working good(Not tested new version).
 
-### Commands:
+## Commands:
 ```
 - hub:
 	aliases: [spawn]
@@ -19,6 +19,7 @@ Essentials minecraft plugin.
 	description: Set the point of the hub.
 	Permissions: hub.set
 ```
+
 
 # Feel free to use, pull request or tell issues!
 ## If used please credit @OfirIsakov
