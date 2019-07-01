@@ -1,8 +1,8 @@
 # Minecraft-Ofirs-Essentials-Plugin
 Essentials minecraft plugin.
 
-# THIS IS STILL IN BETA! ITS FULL OF BUGS!
-# Status: Not working good(Not tested new version).
+## THIS IS STILL IN BETA! ITS FULL OF BUGS!
+## Status: Not working good(Not tested new version).
 
 ## Commands:
 ```
