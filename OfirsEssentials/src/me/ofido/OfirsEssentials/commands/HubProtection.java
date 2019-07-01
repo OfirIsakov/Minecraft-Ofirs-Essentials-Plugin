@@ -73,7 +73,7 @@ public class HubProtection implements CommandExecutor{
 					
 				}
 			} 
-        	Main.sendMessage(player, "Subcommands: addArea, deleteArea");
+        	Main.sendMessage(player, "Subcommands: addRegion, deleteRegion");
     		return false;
     		
 		}

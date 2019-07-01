@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
@@ -18,6 +19,7 @@ import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
@@ -85,6 +87,20 @@ public class Events implements Listener{
 		try {
 			if (event.getSpawnReason() != CreatureSpawnEvent.SpawnReason.SPAWNER_EGG && isInRegion(event.getEntity().getLocation(), world)) {
 				event.setCancelled(true);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+    }
+	
+	@EventHandler
+    public void onEntityExplode(EntityExplodeEvent event){
+        World world = event.getEntity().getWorld();
+		try {
+			for (Block block: event.blockList().toArray(new Block[event.blockList().size()])) {
+				if (isInRegion(block.getLocation(), world)) {
+					event.blockList().remove(block);
+				}
 			}
 		} catch (Exception e) {
 			System.out.println(e);
