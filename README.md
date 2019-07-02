@@ -5,7 +5,7 @@ Essentials minecraft plugin.
 ## THIS IS STILL IN BETA! ITS FULL OF BUGS!
 ```diff
 Status: 
-- Not working(Not tested version 1.0.1).
++ Working(1.1.0).
 ```
 
 
@@ -22,6 +22,14 @@ Status:
 - sethub:
 	aliases: [setspawn]
 	description: Set the point of the hub.
+	Permissions: hub.set
+- home:
+	aliases: [h]
+	description: Teleport to your home.
+	Permissions: hub.set
+- sethome:
+	aliases: [hset]
+	description: Set the point of your home.
 	Permissions: hub.set
 ```
 
