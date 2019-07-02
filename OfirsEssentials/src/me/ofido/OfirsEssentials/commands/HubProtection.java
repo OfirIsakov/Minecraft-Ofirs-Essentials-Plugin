@@ -33,7 +33,7 @@ public class HubProtection implements CommandExecutor{
 		
 		Player player = (Player) sender;
 
-		if(player.hasPermission("hub.editRegions")) {
+		if(player.hasPermission("ofirsessentials.hub.editRegions")) {
 			if(args.length >= 1) {
 
 				if (args[0].toLowerCase().equals("add".toLowerCase())) { // the add sub command

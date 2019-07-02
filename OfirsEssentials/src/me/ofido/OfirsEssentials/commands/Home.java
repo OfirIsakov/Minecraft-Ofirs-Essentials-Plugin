@@ -31,13 +31,13 @@ public class Home implements CommandExecutor{
 		}
 		Player player = (Player) sender;
 
-		if(player.hasPermission("home.teleport")) {
+		if(player.hasPermission("ofirsessentials.home.teleport")) {
 			try {
 				File configFile = new File(Bukkit.getServer().getPluginManager().getPlugin(Main.folderName()).getDataFolder(), "playerHomes.yml");
 				FileConfiguration configYML = YamlConfiguration.loadConfiguration(configFile);
 				
 				String playerName = player.getName();
-				if (args.length >= 1 && player.hasPermission("home.teleport.to.other")) { 
+				if (args.length >= 1 && player.hasPermission("ofirsessentials.home.teleport.to.other")) { 
 					playerName = args[0];
 				}
 				try {

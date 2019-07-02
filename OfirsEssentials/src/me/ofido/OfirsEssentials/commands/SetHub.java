@@ -33,7 +33,7 @@ public class SetHub implements CommandExecutor{
 		
 		Player player = (Player) sender;
 		
-		if(player.hasPermission("hub.set")) {
+		if(player.hasPermission("ofirsessentials.hub.set")) {
 			Location newHub = player.getLocation();
 			File configFile = new File(Bukkit.getServer().getPluginManager().getPlugin(Main.folderName()).getDataFolder(), "hubConfig.yml");
 			FileConfiguration configYML = YamlConfiguration.loadConfiguration(configFile);

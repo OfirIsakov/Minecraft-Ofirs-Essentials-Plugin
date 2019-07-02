@@ -31,9 +31,9 @@ public class Hub implements CommandExecutor{
 		}
 		Player player = (Player) sender;
 
-		if(player.hasPermission("hub.teleport")) {
+		if(player.hasPermission("ofirsessentials.hub.teleport")) {
 			try {
-				if (args.length >= 1 && player.hasPermission("hub.teleport.other")) { 
+				if (args.length >= 1 && player.hasPermission("ofirsessentials.hub.teleport.other")) { 
 					String playerName = args[0];
 					player = Bukkit.getServer().getPlayer(playerName);
 				}

@@ -34,7 +34,7 @@ public class Events implements Listener{
         Action action = event.getAction();
         World world = player.getWorld();
         
-		if (!player.hasPermission("hub.protected.build")) {
+		if (!player.hasPermission("ofirsessentials.hub.protected.build")) {
 			boolean allowed = true;
 			try {
 				if(action == Action.LEFT_CLICK_BLOCK || action == Action.RIGHT_CLICK_BLOCK){

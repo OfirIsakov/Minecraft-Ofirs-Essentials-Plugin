@@ -32,7 +32,8 @@ public class SetHome implements CommandExecutor{
 		}
 		
 		Player player = (Player) sender;
-		if(player.hasPermission("home.set")) {
+		
+		if(player.hasPermission("ofirsessentials.home.set")) {
 			Location newHome = player.getLocation();
 			File configFile = new File(Bukkit.getServer().getPluginManager().getPlugin(Main.folderName()).getDataFolder(), "playerHomes.yml");
 			FileConfiguration configYML = YamlConfiguration.loadConfiguration(configFile);

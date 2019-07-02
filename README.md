@@ -1,5 +1,5 @@
-# Minecraft-Ofirs-Essentials-Plugin
-Essentials minecraft plugin.
+# OfirsEssentials- Minecrfat Plugin
+Essentials Minecraft plugin.
 
 
 ## THIS IS STILL IN BETA! ITS FULL OF BUGS!
@@ -14,23 +14,23 @@ Status:
 - hub:
 	aliases: [spawn]
 	description: Teleport to the hub, can teleport player.
-	Permissions: hub.teleport, hub.teleport.other, hub.protected.build
+	Permissions: ofirsessentials.hub.teleport, ofirsessentials.hub.teleport.other, ofirsessentials.hub.protected.build
 - hubprotection:
 	aliases: [spawnprotection]
 	description: Makes a region that is protected from building, damage and mob spawning.
-	Permissions: hub.editRegions, hub.protected.build
+	Permissions: ofirsessentials.hub.editRegions, ofirsessentials.hub.protected.build
 - sethub:
 	aliases: [setspawn]
 	description: Set the point of the hub.
-	Permissions: hub.set
+	Permissions: ofirsessentials.hub.set
 - home:
 	aliases: [h]
 	description: Teleport to your home.
-	Permissions: home.teleport, home.teleport.to.other
+	Permissions: ofirsessentials.home.teleport, ofirsessentials.home.teleport.to.other
 - sethome:
 	aliases: [hset]
 	description: Set the point of your home.
-	Permissions: home.set
+	Permissions: ofirsessentials.home.set
 ```
 
 
