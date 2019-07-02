@@ -7,10 +7,16 @@ description: Nice Essentials Plugin.
 commands:
   hub:
    aliases: [spawn]
-   description: Teleport to the hub, can teleport player. No Permissions
+   description: Teleport to the hub, can teleport player.
   hubprotection:
    aliases: [spawnprotection]
-   description: Makes a region that is protected from building, damage and mob spawning. The permission are hubProtection.editRegions, hub.protected.build,
+   description: Makes a region that is protected from building, damage and mob spawning.
   sethub:
    aliases: [setspawn]
-   description: Set the point of the hub. The permission are hub.set,
+   description: Set the point of the hub.
+  sethome:
+   aliases: [hset]
+   description: Set a home for you.
+  home:
+   aliases: [h]
+   description: Sends tyou to your home.

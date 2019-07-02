@@ -38,7 +38,7 @@ public class HubProtection implements CommandExecutor{
 
 				if (args[0].toLowerCase().equals("add".toLowerCase())) { // the add sub command
 					if (args.length < 8) { // if not enough args given tell user
-	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "Usage: hubprotection add <regionName> <x1> <y1> <z1> <x2> <y2> <z2>");
+	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "Usage: hubprotection add <regionName> <x1> <y1> <z1> <x2> <y2> <z2>", "HUB");
 	    	        	return false;
 					}
 
@@ -55,7 +55,7 @@ public class HubProtection implements CommandExecutor{
 						cords.add(Integer.min(Integer.parseInt(args[4]), Integer.parseInt(args[7])));
 						
 					} catch (Exception e) { // if error it means that it cannot parse so its not integer
-	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "ERROR: Please enter the cordinatade as integers.");
+	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "ERROR: Please enter the cordinatade as integers.", "HUB");
 						return false;
 					}
 	
@@ -63,7 +63,7 @@ public class HubProtection implements CommandExecutor{
 					return true;
 				} else if (args[0].toLowerCase().equals("delete".toLowerCase())) { // the delete sub command
 					if (args.length < 2) {
-	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "Usage: /hubprotection delete <regionName>");
+	    	        	Main.sendMessage(player, ChatColor.DARK_RED + "Usage: /hubprotection delete <regionName>", "HUB");
 	    	        	return false;
 					}
 					
@@ -75,15 +75,12 @@ public class HubProtection implements CommandExecutor{
 					printRegions(player);
 					return true;
 				}
-			} 
-        	Main.sendMessage(player, "Subcommands: add, delete, regions");
-    		return false;
-    		
+	        	Main.sendMessage(player, "Subcommands: add, delete, regions", "HUB");
+			}
+		} else {
+			Main.tellNoPermissionsCommand(player);
 		}
-		
-    	Main.tellNoPermissionsCommand(player);
 		return false;
-		
 	}
 	
 	public void createRegion(Player player, String regionName, ArrayList<Integer> cords) {
@@ -114,7 +111,7 @@ public class HubProtection implements CommandExecutor{
         	return;
         }
         
-    	Main.sendMessage(player, ChatColor.DARK_GREEN + "Region created");
+    	Main.sendMessage(player, ChatColor.DARK_GREEN + "Region created", "HUB");
 	}
 	
 	public void deleteRegion(Player player, String regionName) {
@@ -137,14 +134,14 @@ public class HubProtection implements CommandExecutor{
 				regionsYML.set(start, null); 
 				regionsYML.save(regionsFile);
 			} else {
-	        	Main.sendMessage(player, ChatColor.DARK_RED + "Region does not exist!");
+	        	Main.sendMessage(player, ChatColor.DARK_RED + "Region does not exist!", "HUB");
 				return;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return;
 		}
-		Main.sendMessage(player, ChatColor.DARK_GREEN + "Deleted region " + regionName + " successfully!");
+		Main.sendMessage(player, ChatColor.DARK_GREEN + "Deleted region " + regionName + " successfully!", "HUB");
 	}
 	
 	public void printRegions(Player player) {
@@ -166,7 +163,7 @@ public class HubProtection implements CommandExecutor{
 				for (String name: regionsYML.getConfigurationSection(world).getKeys(false)) {
 					currentWorld += name + ", ";
 				}
-	        	Main.sendMessage(player, currentWorld);
+	        	Main.sendMessage(player, currentWorld, "HUB");
 			}
 			
 		} catch (Exception e) {

@@ -14,13 +14,13 @@ import org.bukkit.entity.Player;
 
 import me.ofido.OfirsEssentials.Main;
 
-public class Hub implements CommandExecutor{
+public class Home implements CommandExecutor{
 	
 	@SuppressWarnings("unused")
 	private Main plugin;
-	public Hub(Main plugin) {
+	public Home(Main plugin) {
 		this.plugin = plugin;
-		plugin.getCommand("hub").setExecutor(this);
+		plugin.getCommand("home").setExecutor(this);
 	}
 	
 	@Override
@@ -31,32 +31,37 @@ public class Hub implements CommandExecutor{
 		}
 		Player player = (Player) sender;
 
-		if(player.hasPermission("hub.teleport")) {
+		if(player.hasPermission("home.teleport")) {
 			try {
-				if (args.length >= 1 && player.hasPermission("hub.teleport.other")) { 
-					String playerName = args[0];
-					player = Bukkit.getServer().getPlayer(playerName);
-				}
-				
-				File configFile = new File(Bukkit.getServer().getPluginManager().getPlugin(Main.folderName()).getDataFolder(), "hubConfig.yml");
+				File configFile = new File(Bukkit.getServer().getPluginManager().getPlugin(Main.folderName()).getDataFolder(), "playerHomes.yml");
 				FileConfiguration configYML = YamlConfiguration.loadConfiguration(configFile);
+				
+				String playerName = player.getName();
+				if (args.length >= 1 && player.hasPermission("home.teleport.to.other")) { 
+					playerName = args[0];
+				}
 				try {
-					Location spawn = (Location) configYML.get("hub");
-					Main.sendMessage(player, "Sending you to the spawn", "Hub");
-					player.teleport(spawn);
+					Location home = (Location) configYML.get(playerName);
+					if (home != null) {
+						Main.sendMessage(player, "Sending you to your home.", "HOME");
+						player.teleport(home);
+					} else {
+						Main.sendMessage(player, ChatColor.DARK_RED + "Can't find your home! Please set it via /sethome", "HOME");
+					}
 				} catch (Exception e) {
-					Main.sendMessage(player, ChatColor.DARK_RED + "Can't find spawn in the config file! Please set it via /setspawn", "HUB");
+					Main.sendMessage(player, ChatColor.DARK_RED + "Can't find your home! Please set it via /sethome", "HOME");
 					return false;
 				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
+				return false;
 			}
 			return true;
 		} else {
 			Main.tellNoPermissionsCommand(player);
-			return false;
 		}
+		return false;
 	}
 	
 }

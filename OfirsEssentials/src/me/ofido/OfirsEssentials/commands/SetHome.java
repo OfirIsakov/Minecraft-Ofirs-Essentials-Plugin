@@ -15,13 +15,13 @@ import org.bukkit.entity.Player;
 
 import me.ofido.OfirsEssentials.Main;
 
-public class SetHub implements CommandExecutor{
+public class SetHome implements CommandExecutor{
 	
 	@SuppressWarnings("unused")
 	private Main plugin;
-	public SetHub(Main plugin) {
+	public SetHome(Main plugin) {
 		this.plugin = plugin;
-		plugin.getCommand("setspawn").setExecutor(this);
+		plugin.getCommand("sethome").setExecutor(this);
 	}
 	
 	@Override
@@ -32,25 +32,21 @@ public class SetHub implements CommandExecutor{
 		}
 		
 		Player player = (Player) sender;
-		
-		if(player.hasPermission("hub.set")) {
-			Location newHub = player.getLocation();
-			File configFile = new File(Bukkit.getServer().getPluginManager().getPlugin(Main.folderName()).getDataFolder(), "hubConfig.yml");
+		if(player.hasPermission("home.set")) {
+			Location newHome = player.getLocation();
+			File configFile = new File(Bukkit.getServer().getPluginManager().getPlugin(Main.folderName()).getDataFolder(), "playerHomes.yml");
 			FileConfiguration configYML = YamlConfiguration.loadConfiguration(configFile);
-			configYML.set("hub", newHub);
+			configYML.set(player.getName(), newHome);
 			
-			try { // save file
+			try { // saving new home
 				configYML.save(configFile);
-            } catch (IOException e) { // didnt work? tell the user
-            	Main.sendMessage(player, ChatColor.DARK_RED + String.format("Something went wrong while creating the spawnpoint!"), "HUB");
+            } catch (IOException e) {  // didnt work? tell the user
+				player.sendMessage(ChatColor.DARK_RED + String.format("Something went wrong while creating the home!"));
                 e.printStackTrace();
                 return false;
             }
-			
-			Location newSpawn = player.getLocation();
-			Bukkit.getWorld(newHub.getWorld().getName()).setSpawnLocation(newSpawn.getBlockX(), newSpawn.getBlockY(), newSpawn.getBlockZ());
-			Main.sendMessage(player, ChatColor.DARK_GREEN + String.format("Set spawn location to (%d, %d, %d)", newSpawn.getBlockX(), newSpawn.getBlockY(), newSpawn.getBlockZ()), "HUB");
-			
+
+			Main.sendMessage(player, ChatColor.DARK_GREEN + String.format("Set home location to (%d, %d, %d)", newHome.getBlockX(), newHome.getBlockY(), newHome.getBlockZ()), "HOME");
 			return true;
 		} else {
 			Main.tellNoPermissionsCommand(player);

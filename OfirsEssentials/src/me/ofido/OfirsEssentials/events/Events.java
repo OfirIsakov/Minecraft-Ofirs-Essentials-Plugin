@@ -19,6 +19,7 @@ import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -57,7 +58,7 @@ public class Events implements Listener{
     public void onPlayerDamage(final EntityDamageEvent event){
         World world = event.getEntity().getWorld();
 		try {
-			if (event.getEntityType() == EntityType.PLAYER && isInRegion(event.getEntity().getLocation(), world)) {
+			if (event.getEntityType() == EntityType.PLAYER && event.getCause() != DamageCause.VOID && isInRegion(event.getEntity().getLocation(), world)) {
 				Player player = (Player) event.getEntity();
 				if (player.getFireTicks() > 0) {
 					player.setFireTicks(0);
