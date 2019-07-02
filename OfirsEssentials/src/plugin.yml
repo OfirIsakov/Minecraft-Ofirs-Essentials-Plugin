@@ -19,4 +19,4 @@ commands:
    description: Set a home for you.
   home:
    aliases: [h]
-   description: Sends tyou to your home.
+   description: Sends you to your home.

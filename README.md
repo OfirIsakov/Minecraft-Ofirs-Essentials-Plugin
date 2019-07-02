@@ -14,11 +14,11 @@ Status:
 - hub:
 	aliases: [spawn]
 	description: Teleport to the hub, can teleport player.
-	Permissions: None.
+	Permissions: hub.teleport, hub.teleport.other, hub.protected.build
 - hubprotection:
 	aliases: [spawnprotection]
 	description: Makes a region that is protected from building, damage and mob spawning.
-	Permissions: hubProtection.editRegions, hub.protected.build
+	Permissions: hub.editRegions, hub.protected.build
 - sethub:
 	aliases: [setspawn]
 	description: Set the point of the hub.
@@ -26,11 +26,11 @@ Status:
 - home:
 	aliases: [h]
 	description: Teleport to your home.
-	Permissions: hub.set
+	Permissions: home.teleport, home.teleport.to.other
 - sethome:
 	aliases: [hset]
 	description: Set the point of your home.
-	Permissions: hub.set
+	Permissions: home.set
 ```
 
 
